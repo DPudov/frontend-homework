@@ -120,4 +120,64 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting сортирует по 3 полям', function(assert) {
+		const initial = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+
+		const actual = sorting(initial, [ 'prop2', 'prop1', 'prop3' ]);
+
+		const expected = [
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting игнорирует несуществующие поля', function(assert) {
+		const initial = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+
+		const actual = sorting(initial, [ 'prop2', 'prop1', 'prop3', 'prop4' ]);
+
+		const expected = [
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting игнорирует несуществующие поля, даже если даны только они', function(assert) {
+		const initial = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+
+		const actual = sorting(initial, [ 'prop4' ]);
+
+		const expected = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
 });
