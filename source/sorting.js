@@ -1,25 +1,32 @@
 'use strict';
 
 function orderMultipleFields(left, right, props) {
-	var i;
-	for (i = 0; i < props.length; i++) {
-		var curProp = props[i];
-		var equality = left[curProp] - right[curProp];
-		if (typeof left[curProp] === 'string' || typeof right[curProp] === 'string') {
-			equality = left[curProp].localeCompare(right[curProp]);
+	let equality = 0;
+
+	props.every(function(element) {
+		equality = left[element] - right[element];
+
+		if (typeof left[element] === 'string' || typeof right[element] === 'string') {
+			equality = left[element].localeCompare(right[element]);
 		}
-	
+
 		if (equality !== 0) {
-			return equality;
+			return false;
 		}
-	}
-	return 0;
+
+		return true;
+	})
+
+	return equality;
 }
 
 const sorting = function(array, properties) {
-	if (array === undefined) return [];
-	if (properties === undefined) return array;
-	if (array.length === 0 || array.length === 1 || properties.length === 0) return array;
-	
+	if (!array) return [];
+
+	if (typeof properties === 'undefined' ||
+		array.length === 0 ||
+		array.length === 1 ||
+		properties.length === 0) return array;
+
 	return array.sort(function(a, b) { return orderMultipleFields(a, b, properties); });
 };
