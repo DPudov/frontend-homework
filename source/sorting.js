@@ -23,7 +23,7 @@ function orderMultipleFields(left, right, props) {
 const sorting = function(array, properties) {
 	if (!array) return [];
 
-	if (typeof properties === 'undefined' ||
+	if (!properties ||
 		array.length === 0 ||
 		array.length === 1 ||
 		properties.length === 0) return array;
