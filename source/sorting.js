@@ -24,7 +24,7 @@ function isWrongArray(array) {
 	return (!array || !Array.isArray(array));
 }
 
-function isWrongLength(array, properties) {
+function needSorting(array, properties) {
 	const lenArray = array.length;
 	return (lenArray === 0 || lenArray === 1 || properties.length === 0);
 }
@@ -34,7 +34,7 @@ const sorting = function(array, properties) {
 		return [];
 	}
 
-	if (isWrongArray(properties) || isWrongLength(array, properties)) {
+	if (isWrongArray(properties) || needSorting(array, properties)) {
 		return array;
 	}
 
