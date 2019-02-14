@@ -180,4 +180,51 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting получает не массив array, а число', function(assert) {
+		const initial = 1;
+		const actual = sorting(initial, [ 'smth' ]);
+		const expected = [];
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting получает не массив array, а null', function(assert) {
+		const initial = null;
+		const actual = sorting(initial, [ 'smth' ]);
+		const expected = [];
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting получает не массив array, а undefined', function(assert) {
+		const initial = undefined;
+		const actual = sorting(initial, [ 'smth' ]);
+		const expected = [];
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting получает не массив array, а строку', function(assert) {
+		const initial = 'I am string';
+		const actual = sorting(initial, [ 'smth' ]);
+		const expected = [];
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting получает некорректный массив properties, массив array корректен', function(assert) {
+		const initial = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+
+		const actual = sorting(initial, undefined);
+		const expected = [
+			{prop1: 3.1, prop2: 41, prop3: '15'},
+			{prop1: -3.1, prop2: 37, prop3: '13'},
+			{prop1: 73.1, prop2: 33, prop3: '16'},
+			{prop1: 3.1, prop2: 2, prop3: '1222'},
+		];
+		
+		assert.deepEqual(actual, expected);
+	});
 });
