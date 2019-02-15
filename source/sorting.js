@@ -2,10 +2,7 @@
 
 const isWrongArray = (array) => !Array.isArray(array);
 
-const needSorting = (array, properties) => {
-	const lenArray = array.length;
-	return !(lenArray === 0 || lenArray === 1 || properties.length === 0);
-}
+const needSorting = (array, properties) => array.length > 1 && properties.length !== 0;
 
 const isString = (element) => typeof element === 'string';
 
